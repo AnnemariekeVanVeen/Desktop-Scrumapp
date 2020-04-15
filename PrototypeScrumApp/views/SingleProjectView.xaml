@@ -1,0 +1,510 @@
+﻿<Page x:Class="PrototypeScrumApp.views.SingleProjectView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PrototypeScrumApp.views"
+      xmlns:viewmodels="clr-namespace:PrototypeScrumApp.viewmodels"
+      xmlns:materialIcons="clr-namespace:MaterialIcons;assembly=MaterialIcons"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1366"
+      Title="SingleProjectView">
+
+    <Page.DataContext>
+        <viewmodels:SingleProjectViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="#ffffff">
+        <Grid.Resources>
+            <ResourceDictionary>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontFamily" Value="Leelawadee UI"/>
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel 
+            Grid.Row="0" 
+            Grid.Column="0" 
+            Grid.RowSpan="12" 
+            Background="#f7f7f7"/>
+
+        <Button 
+            Click="NavigateSideNav" 
+            Name="HomePageButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="0" 
+            Width="auto" 
+            Background="#FFF7F7F7" 
+            BorderBrush="{x:Null}">
+            <materialIcons:MaterialIcon Icon="ic_home" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="ProjectsButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="1" 
+            Width="auto" 
+            Background="#FF34ACE0" 
+            BorderBrush="{x:Null}">
+            <materialIcons:MaterialIcon Icon="ic_tab" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="UserButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="2" 
+            Width="auto" 
+            BorderBrush="{x:Null}" 
+            Background="#FFF7F7F7">
+            <materialIcons:MaterialIcon Icon="ic_person" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="SettingsButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="3" 
+            Width="auto" 
+            Background="#FFF7F7F7" 
+            BorderBrush="{x:Null}">
+            <materialIcons:MaterialIcon Icon="ic_settings" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="LogoutButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="11" 
+            Width="auto" 
+            BorderBrush="{x:Null}" 
+            Background="#FFF7F7F7">
+            <materialIcons:MaterialIcon Icon="ic_exit_to_app" Height="40"/>
+        </Button>
+
+        <Button 
+            Grid.Row="0" 
+            Grid.Column="2" 
+            BorderBrush="White" 
+            Command="{Binding Path=ShowSingleProject}" 
+            Background="White" 
+            VerticalAlignment="Bottom">
+            <TextBlock>Overview
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline">
+                        <TextDecoration.Pen>
+                            <Pen Brush="#34ACE0"/>
+                        </TextDecoration.Pen>
+                    </TextDecoration>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+        </Button>
+        <Button 
+            Grid.Row="0" 
+            Content="Board" 
+            Grid.Column="3" 
+            Command="{Binding Path=ShowBoardPage}" 
+            VerticalAlignment="Bottom" 
+            Background="White" 
+            BorderBrush="White"/>
+        <Button 
+            Grid.Row="0" 
+            Content="Sprints" 
+            Grid.Column="4" 
+            Command="{Binding Path=ShowSprints}" 
+            VerticalAlignment="Bottom" 
+            BorderBrush="White" 
+            Background="White"/>
+        <Button 
+            Grid.Row="0" 
+            Grid.ColumnSpan="2" 
+            VerticalAlignment="Bottom" 
+            Command="{Binding Path=ShowBacklogItems}" 
+            Content="Product Backlog" 
+            Grid.Column="5" 
+            Background="White" 
+            BorderBrush="White"/>
+        <Button 
+            Name="ProjectSettingsButton"
+            Grid.Row="0" 
+            VerticalAlignment="Bottom" 
+            Command="{Binding Path=ShowProjectSettings}" 
+            Content="IDE" 
+            Grid.Column="7" 
+            Background="White" 
+            BorderBrush="White"/>
+
+        <Label 
+            Grid.Column="9" 
+            FontWeight="Bold" 
+            FontSize="20" 
+            Content="{Binding Path=ProjectTitle}"  
+            Grid.ColumnSpan="2" 
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Right" 
+            Grid.Row="0"/>
+
+        <StackPanel 
+            Grid.Column="2" 
+            Grid.Row="2" 
+            Grid.ColumnSpan="3" 
+            Grid.RowSpan="4" 
+            Background="#FFF7F7F7" 
+            Margin="0,0,10,0">
+            <ScrollViewer Background="#F7F7F7">
+                <StackPanel>
+                    <DataGrid 
+                        IsReadOnly="True"
+                        ColumnWidth="*" 
+                        CanUserAddRows="False" 
+                        RowHeaderWidth="0" 
+                        GridLinesVisibility="None" 
+                        AutoGenerateColumns="false"  
+                        SelectedItem="{Binding Path=SprintItemSelected}" 
+                        ItemsSource="{Binding Path=Sprints}">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="Background" Value="#FFF7F7F7"/>
+                                <Setter Property="Padding" Value="70,8,8,8"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Style>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
+                                <Setter Property="Margin" Value="4,0,0,0"></Setter>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="2*"
+                                Binding="{Binding Name}"
+                                Header="Sprints" FontFamily="Leelawadee UI" FontSize="16">
+                            </DataGridTextColumn>
+                            <DataGridTemplateColumn Width="0.5*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button 
+                                            HorizontalAlignment="Center" 
+                                            Command="{Binding DataContext.ShowSingleSprint, RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}"  
+                                            Foreground="#34ACE0" 
+                                            Background="Transparent" 
+                                            BorderThickness="0">
+                                            <materialIcons:MaterialIcon Icon="ic_search" Height="30"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+
+        <StackPanel 
+            Name="StackPanelBackLog" 
+            Grid.Column="5" 
+            Grid.Row="2" 
+            Grid.ColumnSpan="3" 
+            Grid.RowSpan="4" 
+            Background="#FFF7F7F7" 
+            Margin="5,0">
+        </StackPanel>
+        <Button 
+            Height="44"
+            Grid.Row="5"
+            Grid.Column="5"
+            Grid.ColumnSpan="3"
+            x:Name="BacklogItemsButton" 
+            Content="Show Backlog Items" 
+            Command="{Binding ShowBacklogItems}" 
+            HorizontalAlignment="Stretch" 
+            BorderBrush="Transparent" 
+            VerticalAlignment="Center"
+            Margin="20,0,20,0"
+            Background="#34ACE0"/>
+        <TextBox 
+            Grid.Column="5"
+            Grid.Row="3"
+            Grid.ColumnSpan="3"
+            x:Name="AmountOfBacklogItems" 
+            Text="{Binding Path=AmountOfBacklogItems}" 
+            HorizontalAlignment="Center" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Center" 
+            FontFamily="Leelawadee UI" 
+            FontSize="48" 
+            FontWeight="Bold"
+            BorderThickness="0"
+            Background="#F7F7F7"/>
+
+        <StackPanel 
+            Grid.Column="8" 
+            Grid.Row="2" 
+            Grid.ColumnSpan="3" 
+            Grid.RowSpan="4" 
+            Background="#FFF7F7F7" 
+            Margin="10,0,0,0">
+            
+            <Grid Margin="70,70,0,0" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label 
+                    FontSize="16" 
+                    Content="Done" 
+                    Grid.Row="0" 
+                    Grid.Column="0"/>
+                <Label 
+                    FontSize="16" 
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Content="{Binding AmountOfStorypointsDone}"/>
+                <Label 
+                    FontSize="16" 
+                    Content="To Do"
+                    Grid.Row="1" 
+                    Grid.Column="0"/>
+                <Label 
+                    FontSize="16" 
+                    Grid.Row="1" 
+                    Grid.Column="1" 
+                    Content="{Binding AmountOfStorypointsLeft}"/>
+                <Separator 
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Grid.Column="0"
+                    Margin="0,0,70,0"/>
+                <Label 
+                    FontSize="16" 
+                    Content="Total"
+                    Grid.Row="3" 
+                    Grid.Column="0"/>
+                <Label 
+                    FontSize="16"
+                    Grid.Row="3" 
+                    Grid.Column="1" 
+                    Content="{Binding AmountOfStorypointsBacklog}"/>
+                <Label 
+                    FontSize="16"
+                    Content="Team Velocity"
+                    Grid.Row="5"
+                    Grid.Column="0"/>
+                <Label
+                    FontSize="16" 
+                    Grid.Row="5" 
+                    Grid.Column="1" 
+                    Content="{Binding TeamVelocity}"/>
+            </Grid>
+        </StackPanel>
+        <TextBox 
+            Grid.Row="2"
+            Grid.Column="8"
+            Grid.ColumnSpan="3"
+            x:Name="StoryPointsTitle" 
+            TextWrapping="Wrap" 
+            Text="Story points" 
+            VerticalAlignment="Top" 
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Margin="10,0,0,0"
+            Background="#F7F7F7"
+            BorderThickness="0"
+            Padding="0,10,0,0" 
+            HorizontalAlignment="Stretch" 
+            FontWeight="Bold" 
+            FontFamily="Leelawadee UI" 
+            FontSize="16"/>
+
+        <StackPanel 
+            Grid.Column="2" 
+            Grid.Row="7" 
+            Grid.ColumnSpan="3" 
+            Grid.RowSpan="4" 
+            Background="#FFF7F7F7" 
+            Margin="0,0,10,0">
+            <ScrollViewer Background="#F7F7F7">
+                <StackPanel>
+                    <DataGrid 
+                        IsReadOnly="True"
+                        ColumnWidth="*" 
+                        CanUserAddRows="False" 
+                        RowHeaderWidth="0" 
+                        GridLinesVisibility="None" 
+                        AutoGenerateColumns="false"  
+                        ItemsSource="{Binding Users}">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="Background" Value="#FFF7F7F7"/>
+                                <Setter Property="Padding" Value="8,8,8,8"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Style>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                                <Setter Property="Margin" Value="4,0,0,0"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="2*"
+                                Binding="{Binding Name}"
+                                Header="Team Members" 
+                                FontFamily="Leelawadee UI" 
+                                FontSize="16"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+
+        <StackPanel 
+            Grid.Column="5" 
+            Grid.Row="7" 
+            Grid.ColumnSpan="3" 
+            Grid.RowSpan="4"
+            Background="#FFF7F7F7" 
+            Margin="10,0"/>
+        <TextBox
+            Margin="10,0"
+            Background="#F7F7F7"
+            BorderThickness="0"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Grid.Column="5"
+            Grid.Row="7"
+            Grid.ColumnSpan="3"
+            x:Name="BurnupChartTitle" 
+            HorizontalAlignment="Stretch" 
+            Padding="0,10,0,0" 
+            TextWrapping="Wrap" 
+            Text="Burnup chart" 
+            VerticalAlignment="Top" 
+            FontWeight="Bold" 
+            FontFamily="Leelawadee UI" 
+            FontSize="16"/>
+        <Border 
+            Grid.Column="5" 
+            Grid.Row="8" 
+            Grid.RowSpan="2" 
+            Grid.ColumnSpan="3">
+            <materialIcons:MaterialIcon 
+                Icon="ic_trending_up" 
+                Height="124" 
+                VerticalAlignment="Center" 
+                Foreground="#808080"/>
+        </Border>
+        <TextBox
+            Grid.Column="5"
+            Grid.Row="10"
+            Grid.ColumnSpan="3"
+            Background="#F7F7F7"
+            BorderThickness="0"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            FontSize="16"
+            Text="Coming Soon"/>
+
+        <StackPanel 
+            Grid.Column="8" 
+            Grid.Row="7" 
+            Grid.ColumnSpan="3" 
+            Grid.RowSpan="4" 
+            Background="#FFF7F7F7" 
+            Margin="10,0,0,0"/>
+        <TextBox
+            Margin="10,0,0,0"
+            Padding="0,10,0,0" 
+            Grid.Row="7"
+            Grid.Column="8"
+            Grid.ColumnSpan="3"
+            x:Name="BurndownChartTitle" 
+            Background="#F7F7F7"
+            BorderThickness="0"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            TextWrapping="Wrap" 
+            Text="Burndown chart"
+            VerticalAlignment="Top" 
+            FontWeight="Bold" 
+            FontFamily="Leelawadee UI" 
+            FontSize="16"/>
+        <Border
+            Grid.Column="8" 
+            Grid.Row="8" 
+            Grid.RowSpan="2" 
+            Grid.ColumnSpan="3">
+            <materialIcons:MaterialIcon 
+                Icon="ic_trending_down" 
+                Height="124" 
+                VerticalAlignment="Center" 
+                Foreground="#808080"/>
+        </Border>
+        <TextBox
+            Grid.Column="8"
+            Grid.Row="10"
+            Grid.ColumnSpan="3"
+            Background="#F7F7F7"
+            BorderThickness="0"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            FontSize="16"
+            Text="Coming Soon"/>
+    </Grid>
+</Page>

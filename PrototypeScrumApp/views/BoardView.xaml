@@ -1,0 +1,681 @@
+﻿<Page x:Class="PrototypeScrumApp.views.BoardView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PrototypeScrumApp.views"
+      xmlns:viewmodels="clr-namespace:PrototypeScrumApp.viewmodels"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:materialIcons="clr-namespace:MaterialIcons;assembly=MaterialIcons"
+      xmlns:common="clr-namespace:Hprose.Common;assembly=Hprose"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1366"
+      AllowDrop="True"
+      Title="BoardView">
+
+    <Page.DataContext>
+        <viewmodels:BoardViewModel />
+    </Page.DataContext>
+
+    <Grid Background="White">
+        <Grid.Resources>
+            <ResourceDictionary>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="FontFamily" Value="Leelawadee UI"></Setter>
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel 
+            Grid.Row="0" 
+            Grid.Column="0" 
+            Grid.RowSpan="12" 
+            Background="#f7f7f7"/>
+
+        <Button 
+            Click="NavigateSideNav" 
+            Name="HomePageButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="0" 
+            Width="auto" 
+            Background="#FFF7F7F7" 
+            BorderBrush="{x:Null}">
+            <materialIcons:MaterialIcon Icon="ic_home" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="ProjectsButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="1" 
+            Width="auto" 
+            Background="#FF34ACE0" 
+            BorderBrush="{x:Null}">
+            <materialIcons:MaterialIcon Icon="ic_tab" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="UserButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="2" 
+            Width="auto" 
+            BorderBrush="{x:Null}" 
+            Background="#FFF7F7F7">
+            <materialIcons:MaterialIcon Icon="ic_person" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="SettingsButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="3" 
+            Width="auto" 
+            Background="#FFF7F7F7" 
+            BorderBrush="{x:Null}">
+            <materialIcons:MaterialIcon Icon="ic_settings" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="LogoutButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="11" 
+            Width="auto" 
+            BorderBrush="{x:Null}" 
+            Background="#FFF7F7F7">
+            <materialIcons:MaterialIcon Icon="ic_exit_to_app" Height="40"/>
+        </Button>
+
+        <Button 
+            Content="Overview"
+            Grid.Row="0" 
+            Grid.Column="2" 
+            BorderBrush="White" 
+            Command="{Binding Path=ShowSingleProject}" 
+            Background="White" 
+            VerticalAlignment="Bottom"/>
+        <Button 
+            Grid.Row="0" 
+            Grid.Column="3" 
+            Command="{Binding Path=ShowBoardPage}" 
+            VerticalAlignment="Bottom" 
+            Background="White" 
+            BorderBrush="White">
+            <TextBlock>Board
+                <TextBlock.TextDecorations>
+                    <TextDecoration Location="Underline">
+                        <TextDecoration.Pen>
+                            <Pen Brush="#34ACE0"/>
+                        </TextDecoration.Pen>
+                    </TextDecoration>
+                </TextBlock.TextDecorations>
+            </TextBlock>
+        </Button>
+        <Button 
+            Grid.Row="0" 
+            Content="Sprints" 
+            Grid.Column="4" 
+            Command="{Binding Path=ShowSprints}" 
+            VerticalAlignment="Bottom" 
+            BorderBrush="White" 
+            Background="White"/>
+        <Button 
+            Grid.Row="0" 
+            Grid.ColumnSpan="2" 
+            VerticalAlignment="Bottom" 
+            Command="{Binding Path=ShowBacklogItems}" 
+            Content="Product Backlog" 
+            Grid.Column="5" 
+            Background="White" 
+            BorderBrush="White"/>
+        <Button 
+            Name="ProjectSettingsButton"
+            Grid.Row="0" 
+            VerticalAlignment="Bottom" 
+            Command="{Binding Path=ShowProjectSettings}" 
+            Content="IDE" 
+            Grid.Column="7" 
+            Background="White" 
+            BorderBrush="White"/>
+        <Label 
+            Grid.Column="9" 
+            FontWeight="Bold" 
+            FontSize="20" 
+            Content="{Binding Path=ProjectTitle}" 
+            Grid.ColumnSpan="2" 
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Right" 
+            Grid.Row="0"/>
+
+        <ComboBox 
+            Grid.Row="1"
+            Height="40"
+            Grid.Column="2"
+            Grid.ColumnSpan="3"
+            Margin="0,0,20,0"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            ItemsSource="{Binding Sprints}" 
+            SelectedItem="{Binding SprintItemSelected}" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock 
+                            Text="{Binding Name}" 
+                            FontFamily="Leelawadee UI" 
+                            FontSize="14"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Border
+            Grid.Column="7" 
+            Grid.ColumnSpan="4"
+            Grid.Row="1" 
+            Height="40"
+            BorderBrush="#34ACE0"
+            BorderThickness="1">
+            <DockPanel>
+                <materialIcons:MaterialIcon Icon="ic_warning" Height="30" BorderThickness="0" Margin="5,0,0,0"/>
+                <TextBox 
+                    BorderThickness="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontSize="16" 
+                    TextWrapping="Wrap"
+                    IsReadOnly="True">
+                    Select an item and drag it to another column
+                </TextBox>
+            </DockPanel>
+        </Border>
+
+        <Label
+            Margin="0,0,20,0"
+            HorizontalContentAlignment="Center"
+            Background="#34ACE0"
+            Content="To Do"
+            Foreground="Black"
+            FontWeight="Bold"
+            FontSize="16"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top" 
+            Grid.Row="2" 
+            Grid.Column="2"
+            Grid.ColumnSpan="3">
+            <Label.Effect>
+                <DropShadowEffect
+                    ShadowDepth="15"
+                    Direction="300"
+                    Color="Black"
+                    Opacity="0.4"
+                    BlurRadius="10">
+                </DropShadowEffect>
+            </Label.Effect>
+        </Label>
+        <Label 
+            Margin="10,0,10,0"
+            Background="#34ACE0"
+            Content="Doing"
+            Foreground="Black"
+            FontWeight="Bold"
+            FontSize="16"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            VerticalAlignment="Top" 
+            Grid.Row="2" 
+            Grid.Column="5"
+            Grid.ColumnSpan="3">
+            <Label.Effect>
+                <DropShadowEffect
+                    ShadowDepth="15"
+                    Direction="300"
+                    Color="Black"
+                    Opacity="0.4"
+                    BlurRadius="10">
+                </DropShadowEffect>
+            </Label.Effect>
+        </Label>
+        <Label
+            Margin="20,0,0,0"
+            Content="Done"
+            Background="#34ACE0"
+            Foreground="Black"
+            FontWeight="Bold"
+            FontSize="16"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top" 
+            Grid.ColumnSpan="3" 
+            Grid.Row="2" 
+            Grid.Column="8"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center">
+            <Label.Effect>
+                <DropShadowEffect
+                    ShadowDepth="15"
+                    Direction="300"
+                    Color="Black"
+                    Opacity="0.4"
+                    BlurRadius="10">
+                </DropShadowEffect>
+            </Label.Effect>
+        </Label>
+        
+        <ListBox 
+            Background="#F7F7F7"
+            BorderBrush="{x:Null}"
+            Name="ListBox1" 
+            Grid.Row="2" 
+            Grid.Column="2" 
+            ItemsSource="{Binding BacklogItems}" 
+            AllowDrop="True"  
+            SelectedItem="{Binding ItemSelected}"
+            Grid.ColumnSpan="3" 
+            Grid.RowSpan="9" 
+            Tag="1"
+            Margin="0,30,20,0"
+            PreviewMouseLeftButtonDown="ListBox_OnMouseDown" 
+            Drop="ListBox_OnDrop"
+            HorizontalContentAlignment="Stretch">
+            <ListBox.Effect>
+                <DropShadowEffect
+                    ShadowDepth="15"
+                    Direction="300"
+                    Color="Black"
+                    Opacity="0.4"
+                    BlurRadius="10">
+                </DropShadowEffect>
+            </ListBox.Effect>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border 
+                        CornerRadius="5" 
+                        Margin="3" 
+                        Background="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                FontSize="16"
+                                Content="User Story:" 
+                                FontWeight="Bold"/>
+                            <DockPanel 
+                                Grid.Column="0" 
+                                Grid.Row="1" 
+                                Grid.ColumnSpan="2"
+                                Margin="3">
+                                <TextBox 
+                                    FontSize="16"
+                                    IsReadOnly="True" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Left" 
+                                    BorderThickness="0">
+                                    As a
+                                </TextBox>
+                                <TextBox 
+                                    FontSize="16"
+                                    TextWrapping="Wrap" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    IsReadOnly="True" 
+                                    BorderThickness="0" 
+                                    Text="{Binding Path=UserRole}"/>
+                            </DockPanel>
+                            <DockPanel 
+                                Margin="3"
+                                Grid.Column="0" 
+                                Grid.Row="2" 
+                                Grid.ColumnSpan="2" 
+                                Grid.RowSpan="2">
+                                <TextBox 
+                                    FontSize="16"
+                                    IsReadOnly="True" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Left" 
+                                    BorderThickness="0">
+                                    I want to
+                                </TextBox>
+                                <TextBox 
+                                    FontSize="16"
+                                    TextWrapping="Wrap" 
+                                    IsReadOnly="True" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    BorderThickness="0" 
+                                    Text="{Binding Path=Action}"/>
+                            </DockPanel>
+                            <Label 
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                Grid.Row="4" 
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="Story Points:" 
+                                FontWeight="Bold"
+                                FontSize="16"/>
+                            <Label
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                FontSize="16" 
+                                Content="{Binding Path=StoryPoints}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox 
+            Background="#F7F7F7"
+            BorderBrush="{x:Null}"
+            Name="ListBox2" 
+            AllowDrop="True" 
+            Tag="2"
+            Margin="10,30,10,0"
+            PreviewMouseLeftButtonDown="ListBox_OnMouseDown" 
+            Drop="ListBox_OnDrop"
+            Grid.Row="2" 
+            Grid.Column="5" 
+            ItemsSource="{Binding BacklogItemsDoing}" 
+            SelectedItem="{Binding ItemSelectedDoing}" 
+            Grid.ColumnSpan="3" 
+            Grid.RowSpan="9"
+            HorizontalContentAlignment="Stretch">
+            <ListBox.Effect>
+                <DropShadowEffect
+                    ShadowDepth="15"
+                    Direction="300"
+                    Color="Black"
+                    Opacity="0.4"
+                    BlurRadius="10">
+                </DropShadowEffect>
+            </ListBox.Effect>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border 
+                        CornerRadius="5" 
+                        Margin="3" 
+                        Background="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                FontSize="16"
+                                Content="User Story:" 
+                                FontWeight="Bold"/>
+                            <DockPanel 
+                                Grid.Column="0" 
+                                Grid.Row="1" 
+                                Grid.ColumnSpan="2"
+                                Margin="3">
+                                <TextBox 
+                                    FontSize="16"
+                                    IsReadOnly="True" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Left" 
+                                    BorderThickness="0">
+                                    As a
+                                </TextBox>
+                                <TextBox 
+                                    FontSize="16"
+                                    TextWrapping="Wrap" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    IsReadOnly="True" 
+                                    BorderThickness="0" 
+                                    Text="{Binding Path=UserRole}"/>
+                            </DockPanel>
+                            <DockPanel 
+                                Margin="3"
+                                Grid.Column="0" 
+                                Grid.Row="2" 
+                                Grid.ColumnSpan="2" 
+                                Grid.RowSpan="2">
+                                <TextBox 
+                                    FontSize="16"
+                                    IsReadOnly="True" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Left" 
+                                    BorderThickness="0">
+                                    I want to
+                                </TextBox>
+                                <TextBox 
+                                    FontSize="16"
+                                    TextWrapping="Wrap" 
+                                    IsReadOnly="True" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    BorderThickness="0" 
+                                    Text="{Binding Path=Action}"/>
+                            </DockPanel>
+                            <Label 
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                Grid.Row="4" 
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="Story Points:" 
+                                FontWeight="Bold"
+                                FontSize="16"/>
+                            <Label
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                FontSize="16" 
+                                Content="{Binding Path=StoryPoints}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox 
+            Background="#F7F7F7"
+            BorderBrush="{x:Null}"
+            Name="ListBox3"  
+            Margin="20,30,0,0"
+            PreviewMouseLeftButtonDown="ListBox_OnMouseDown" 
+            Drop="ListBox_OnDrop"
+            Grid.Row="2" 
+            Grid.Column="8" 
+            ItemsSource="{Binding BacklogItemsDone}" 
+            SelectedItem="{Binding ItemSelectedDone}" 
+            Tag="3"  
+            Grid.ColumnSpan="3" 
+            Grid.RowSpan="9"
+            AllowDrop="True"
+            HorizontalContentAlignment="Stretch">
+            <ListBox.Effect>
+                <DropShadowEffect
+                    ShadowDepth="15"
+                    Direction="300"
+                    Color="Black"
+                    Opacity="0.4"
+                    BlurRadius="10">
+                </DropShadowEffect>
+            </ListBox.Effect>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border 
+                        CornerRadius="5" 
+                        Margin="3" 
+                        Background="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                FontSize="16"
+                                Content="User Story:" 
+                                FontWeight="Bold"/>
+                            <DockPanel 
+                                Grid.Column="0" 
+                                Grid.Row="1" 
+                                Grid.ColumnSpan="2"
+                                Margin="3">
+                                <TextBox 
+                                    FontSize="16"
+                                    IsReadOnly="True" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Left" 
+                                    BorderThickness="0">
+                                    As a
+                                </TextBox>
+                                <TextBox 
+                                    FontSize="16"
+                                    TextWrapping="Wrap" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    IsReadOnly="True" 
+                                    BorderThickness="0" 
+                                    Text="{Binding Path=UserRole}"/>
+                            </DockPanel>
+                            <DockPanel 
+                                Margin="3"
+                                Grid.Column="0" 
+                                Grid.Row="2" 
+                                Grid.ColumnSpan="2" 
+                                Grid.RowSpan="2">
+                                <TextBox 
+                                    FontSize="16"
+                                    IsReadOnly="True" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Left" 
+                                    BorderThickness="0">
+                                    I want to
+                                </TextBox>
+                                <TextBox 
+                                    FontSize="16"
+                                    TextWrapping="Wrap" 
+                                    IsReadOnly="True" 
+                                    VerticalContentAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    BorderThickness="0" 
+                                    Text="{Binding Path=Action}"/>
+                            </DockPanel>
+                            <Label 
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                Grid.Row="4" 
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="Story Points:" 
+                                FontWeight="Bold"
+                                FontSize="16"/>
+                            <Label
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                FontSize="16" 
+                                Content="{Binding Path=StoryPoints}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

@@ -1,0 +1,77 @@
+﻿<Window x:Class="PrototypeScrumApp.MainWindow"
+        xmlns:tb="http://www/hardcodet.net/taskbar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrototypeScrumApp"
+        xmlns:taskbarNotification="http://www.hardcodet.net/taskbar"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="768" Width="1366">
+
+    <Grid Background="White">
+
+        <Grid.Resources>
+            <ResourceDictionary>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="FontFamily" Value="Leelawadee UI"></Setter>
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Column="0" 
+               Grid.Row="0" 
+               Grid.RowSpan="12" 
+               Grid.ColumnSpan="12"
+               Name="FrameWithinGrid"
+               NavigationUIVisibility="Hidden"
+               ></Frame>
+
+        <taskbarNotification:TaskbarIcon x:Name="NotifyIconPrototype"
+            Visibility="Visible"
+            ToolTipText="Scrumium"
+            IconSource="/assets/images/Proycontec-Robots-Robot-trash-full.ico">
+            <taskbarNotification:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem FontFamily="Leelawadee UI" Header="Home" Name="HomePageSystray" Click="SystrayMenu_Click"></MenuItem>
+                    <MenuItem FontFamily="Leelawadee UI" Header="Open" Name="OpenSystray" Click="SystrayMenu_Click"></MenuItem>
+                    <MenuItem FontFamily="Leelawadee UI" Header="Minimize" Name="MinimizeSystray" Click="SystrayMenu_Click"></MenuItem>
+                    <MenuItem FontFamily="Leelawadee UI" Header="Exit" Name="ExitSystray" Click="SystrayMenu_Click"></MenuItem>
+                </ContextMenu>
+            </taskbarNotification:TaskbarIcon.ContextMenu>
+        </taskbarNotification:TaskbarIcon>
+
+    <ContentControl Grid.Row="0" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="12" Content="{Binding ViewModel}" />
+    </Grid>
+</Window>

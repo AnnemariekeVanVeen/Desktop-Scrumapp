@@ -1,0 +1,222 @@
+﻿<Page x:Class="PrototypeScrumApp.views.ProjectOverview"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PrototypeScrumApp.views"
+      xmlns:viewmodels="clr-namespace:PrototypeScrumApp.viewmodels"
+      xmlns:materialIcons="clr-namespace:MaterialIcons;assembly=MaterialIcons"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1366"
+      Title="ProjectOverview">
+
+    <Page.DataContext>
+        <viewmodels:ProjectViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="White">
+        <Grid.Resources>
+            <ResourceDictionary>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="FontFamily" Value="Leelawadee UI"></Setter>
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel 
+            Grid.Row="0" 
+            Grid.Column="0" 
+            Grid.RowSpan="12" 
+            Background="#f7f7f7"/>
+
+        <Button 
+            Click="NavigateSideNav" 
+            Name="HomePageButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="0" 
+            Width="auto" 
+            Background="#FFF7F7F7" 
+            BorderBrush="{x:Null}">
+            <materialIcons:MaterialIcon Icon="ic_home" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="ProjectsButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="1" 
+            Width="auto" 
+            Background="#FF34ACE0" 
+            BorderBrush="{x:Null}">
+            <materialIcons:MaterialIcon Icon="ic_tab" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="UserButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="2" 
+            Width="auto" 
+            BorderBrush="{x:Null}" 
+            Background="#FFF7F7F7">
+            <materialIcons:MaterialIcon Icon="ic_person" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="SettingsButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="3" 
+            Width="auto" 
+            Background="#FFF7F7F7" 
+            BorderBrush="{x:Null}">
+            <materialIcons:MaterialIcon Icon="ic_settings" Height="40"/>
+        </Button>
+        <Button 
+            Click="NavigateSideNav" 
+            Name="LogoutButton" 
+            Height="auto" 
+            Grid.Column="0" 
+            Grid.Row="11" 
+            Width="auto" 
+            BorderBrush="{x:Null}" 
+            Background="#FFF7F7F7">
+            <materialIcons:MaterialIcon Icon="ic_exit_to_app" Height="40"/>
+        </Button>
+        <Button 
+            Name="CreateProjectButton" 
+            Grid.Column="10" 
+            Grid.Row="1" 
+            Background="white" 
+            HorizontalContentAlignment="Center" 
+            Content="Add Project" 
+            Height="44" 
+            Click="CreateProjectButton_Click" 
+            BorderBrush="{x:Null}"/>
+
+        <ScrollViewer 
+            Grid.ColumnSpan="9" 
+            Grid.Column="2" 
+            Grid.RowSpan="9" 
+            Grid.Row="2">
+            <StackPanel>
+                <DataGrid 
+                    ColumnWidth="*"
+                    Name="grdData"
+                    IsReadOnly="True"
+                    GridLinesVisibility="None"
+                    RowHeaderWidth="0"
+                    CanUserAddRows="False"
+                    AutoGenerateColumns="False"
+                    Background="#34ace0"
+                    ItemsSource="{Binding Path=Projects}"
+                    SelectedItem="{Binding Path=ItemSelected}">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="Background" Value="#34ACE0"/>
+                            <Setter Property="Padding" Value="8,15,8,15"/>
+                        </Style>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Height" Value="50"/>
+                        </Style>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="VerticalAlignment" Value="Stretch"/>
+                            <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
+                            <Setter Property="Margin" Value="4,0,0,0"></Setter>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn 
+                            Binding="{Binding Title}" 
+                            Header="Project"/>
+                        <DataGridTextColumn 
+                            Width="2*" 
+                            Binding="{Binding Description}" 
+                            Header="Description"/>
+                        <DataGridTextColumn 
+                            Binding="{Binding Deadline}" 
+                            Header="Deadline"/>
+                        <DataGridTemplateColumn Width="0.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button 
+                                        HorizontalAlignment="Center" 
+                                        Command="{Binding DataContext.ShowProject, RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}"  
+                                        Foreground="#34ACE0" 
+                                        Background="Transparent" 
+                                        BorderThickness="0">
+                                        <materialIcons:MaterialIcon Icon="ic_search" Height="30"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="0.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button 
+                                        HorizontalAlignment="Center" 
+                                        Command="{Binding DataContext.UpdateProject, RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}"  
+                                        Foreground="#E0C334" 
+                                        Background="Transparent" 
+                                        BorderThickness="0">
+                                        <materialIcons:MaterialIcon Icon="ic_edit" Height="30"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="0.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        Command="{Binding DataContext.DeleteProject, RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}"  
+                                        Foreground="#FFCB2D2D" 
+                                        HorizontalAlignment="Center" 
+                                        Background="Transparent" 
+                                        BorderThickness="0">
+                                        <materialIcons:MaterialIcon Icon="ic_delete" Height="30"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
